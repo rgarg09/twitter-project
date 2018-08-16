@@ -1,0 +1,80 @@
+drop table if exists twitter_data purge;
+create table twitter_data (favorite_count int, source varchar(500), text varchar(700), in_reply_to_screen_name string, is_retweet string, created_at date, retweet_count int, id_str string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' stored as textfile;
+load data local inpath '/home/rgarg/realdonaldtrump.csv' overwrite into table twitter_data;
+select * from twitter_data limit 10;
+
+select sum(favorite_count)
+from twitter_data;
+
+select sum(favorite_count) as fvt, sum(retweet_count) as retweet
+from twitter_data
+where (
+lower(text) like ('%fake news%') or
+lower(text) like ('%fakenews%') or
+lower(text) like ('%news%') or
+lower(text) like ('%media%') or
+lower(text) like ('%fake media%') or
+lower(text) like ('%fox%') or
+lower(text) like ('%cnn%') or
+lower(text) like ('%nbc%') or
+lower(text) like ('%abc%') or
+lower(text) like ('%nypost%') or
+lower(text) like ('%nytimes%') or
+lower(text) like ('%washingtonpost%')
+);
+
+select sum(favorite_count) as fvt, sum(retweet_count) as retweet
+from twitter_data
+where (
+lower(text) like ('%russia%') or
+lower(text) like ('%mexico%') or
+lower(text) like ('%north korea%') or
+lower(text) like ('%china%') or
+lower(text) like ('%iran%') or
+lower(text) like ('%japan%') or
+lower(text) like ('%south korea%') or
+lower(text) like ('%ukraine%') or
+lower(text) like ('%estonia%') or
+lower(text) like ('%nypost%') or
+lower(text) like ('%lithuania%') or
+lower(text) like ('%syria%') or
+lower(text) like ('%india%') or
+lower(text) like ('%pakistan%')
+);
+
+select sum(favorite_count) as fvt, sum(retweet_count) as retweet
+from twitter_data
+where (
+lower(text) like ('%tax%') or
+lower(text) like ('%stock exchange%') or
+lower(text) like ('%wall street%') or
+lower(text) like ('%jobs%') or
+lower(text) like ('%employment%') or
+lower(text) like ('%unemployment%') or
+lower(text) like ('%gdp%') or
+lower(text) like ('%economy%')
+);
+
+select sum(favorite_count) as fvt, sum(retweet_count) as retweet
+from twitter_data
+where (
+lower(text) like ('%immigration%') or
+lower(text) like ('%daca%') or
+lower(text) like ('%unlawful%') or
+lower(text) like ('%refugee%') or
+lower(text) like ('%lottery%') or
+lower(text) like ('%immigrant%') or
+lower(text) like ('%travel ban%') or
+lower(text) like ('%border security%') or
+lower(text) like ('%visa%')
+);
+
+select sum(favorite_count) as fvt, sum(retweet_count) as retweet
+from twitter_data;
+where (
+lower(text) like ('%healthcare%') or
+lower(text) like ('%obamacare%') or
+lower(text) like ('%ocare%') or
+lower(text) like ('%health%') or
+lower(text) like ('%insurance%') 
+);
